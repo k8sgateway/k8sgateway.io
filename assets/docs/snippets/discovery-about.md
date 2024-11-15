@@ -3,5 +3,6 @@
 The following resources can be discovered automatically:
 
 * Kubernetes Services
+* AWS EC2 instances
 * AWS Lambda Functions
 * OpenAPI-based Functions
