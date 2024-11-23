@@ -11,15 +11,15 @@ AWS provides these three types of Elastic Load Balancers (ELB):
 * **Classic Load Balancer (CLB)**: An old AWS load balancer that provides a mixture of TCP/UDP and HTTP capabilities. It predates some of the Virtual Private Cloud (VPC) infrastructure. Because of that, recommends new deployments to utilize on eof the other load balancer types.
 * **Network Load Balancer (NLB)**: An optimized L4 TCP/UDP load balancer with very high throughput that can handle millions of requests per second while maintaining low latency. This load balancer also has deep integration with other AWS services like Route 53 (DNS).
 * **Application Load Balancer (ALB)**: An L7 HTTP-only load balancer that is focused on providing HTTP request routing capabilities.
-These load balancers support offloading TLS termination and some degree of cross-availability zone failover and support. 
+These load balancers support offloading TLS termination and some degree of cross-availability zone failover and support.
 
-For more information, see the [AWS load balancer documentation](https://docs.aws.amazon.com/elasticloadbalancing/index.html). 
+For more information, see the [AWS load balancer documentation](https://docs.aws.amazon.com/elasticloadbalancing/index.html).
 
 ## Set up the AWS Load Balancer Controller
 
-The following steps show how to deploy the AWS Load Balancer Controller in your cluster. For more information about this installation, see the [AWS load balancer controller documentation](https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.2/deploy/installation/). 
+The following steps show how to deploy the AWS Load Balancer Controller in your cluster. For more information about this installation, see the [AWS load balancer controller documentation](https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.10/deploy/installation/).
 
-1. Create an AWS IAM account 
+1. Create an AWS IAM account
    ```sh
    export CLUSTER_NAME="my-cluster"
    export REGION="eu-central-1"
@@ -34,7 +34,16 @@ The following steps show how to deploy the AWS Load Balancer Controller in your 
        --approve
 
    # Fetch the IAM policy required for our Service-Account
-   curl -o iam-policy.json https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.5.3/docs/install/iam_policy.json
+   # Download the appropriate IAM policy based on your region:
+
+   # For US Gov Cloud regions:
+   curl -o iam-policy.json https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.10.0/docs/install/iam_policy_us-gov.json
+
+   # For China regions:
+   curl -o iam-policy.json https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.10.0/docs/install/iam_policy_cn.json
+
+   # For all other regions:
+   curl -o iam-policy.json https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.10.0/docs/install/iam_policy.json
 
    # Create the IAM policy
    aws iam create-policy \
