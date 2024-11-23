@@ -55,7 +55,7 @@ To view the default Settings resource, run the following command:
 kubectl get settings default -n gloo-system -o yaml
 ```
 
-When you follow the [Get started](/docs/quickstart/) guide, the following Settings resource is created for you. To understand each setting, check out the [Settings custom resource documentation](/docs/reference/api/settings). 
+When you follow the [Get started](/docs/quickstart/) guide, the following Settings resource is created for you. To understand each setting, check out the [Settings custom resource documentation](/docs/reference/api/top-level/settings.proto.sk/). 
 ```yaml
 apiVersion: gloo.solo.io/v1
 kind: Settings
